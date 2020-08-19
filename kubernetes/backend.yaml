@@ -30,3 +30,15 @@ spec:
               value: mongodb+srv://root:SCvQd6jrSQgrwVu0@maratona-aks.48pkj.azure.mongodb.net/ship_manager?retryWrites=true&w=majority
             - name: DATABASE_MONGODB_DBNAME
               value: ship_manager
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: porto-backend
+  selector:
+    app: porto-backend
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
