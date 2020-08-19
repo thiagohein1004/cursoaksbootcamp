@@ -31,14 +31,30 @@ spec:
             - name: DATABASE_MONGODB_DBNAME
               value: ship_manager
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: porto-backend
+spec:
   selector:
     app: porto-backend
-  type: LoadBalancer
   ports:
     - name: http
       port: 80
       targetPort: 3000
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: porto-backend
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+    - host: porto-backend.daf1769eda1b44bbb4f3.eastus.aksapp.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: porto-backend
+              servicePort: http
