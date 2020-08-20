@@ -27,7 +27,10 @@ spec:
               name: http
           env:
             - name: DATABASE_MONGODB_URI
-              value: mongodb+srv://root:SCvQd6jrSQgrwVu0@maratona-aks.48pkj.azure.mongodb.net/ship_manager?retryWrites=true&w=majority
+              valueFrom:
+                secretKeyRef:
+                  key: database_mongodb_uri
+                  name: backend-db
             - name: DATABASE_MONGODB_DBNAME
               value: ship_manager
 ---
@@ -58,3 +61,11 @@ spec:
             backend:
               serviceName: porto-backend
               servicePort: http
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backend-db
+type: Opaque
+stringData:
+  database_mongodb_uri: mongodb+srv://root:SCvQd6jrSQgrwVu0@maratona-aks.48pkj.azure.mongodb.net/ship_manager?retryWrites=true&w=majority
