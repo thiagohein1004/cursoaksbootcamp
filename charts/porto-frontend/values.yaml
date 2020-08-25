@@ -1,0 +1,23 @@
+name: porto-frontend
+image:
+  tag: v1.0.0
+appPort: 80
+
+deployment:
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+
+ingress:
+  hostName: porto-backend.daf1769eda1b44bbb4f3.eastus.aksapp.io
+
+service:
+  port:
+
+configMap:
+  name:

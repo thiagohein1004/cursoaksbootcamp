@@ -1,0 +1,26 @@
+name: porto-backend
+image:
+  tag: v1.0.0
+appPort: 3000
+
+deployment:
+  envs:
+    dbName: ship_manager
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+
+ingress:
+  hostName: porto-backend.daf1769eda1b44bbb4f3.eastus.aksapp.io
+
+service:
+  port:
+
+secret:
+  name:
+  mongodb_uri: mongodb+srv://root:SCvQd6jrSQgrwVu0@maratona-aks.48pkj.azure.mongodb.net/ship_manager?retryWrites=true&w=majority
