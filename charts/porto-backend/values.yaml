@@ -1,6 +1,7 @@
 name: porto-backend
 image:
   tag: v1.0.0
+  registry: maratonaaks.azurecr.io
 appPort: 3000
 
 deployment:
