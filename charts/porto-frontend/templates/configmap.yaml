@@ -4,4 +4,4 @@ metadata:
   name: {{default "frontend-config" .Values.configMap.name }}
 data:
   config.js: |
-    {{ tpl "const config = (() => ({ 'VUE_APP_BACKEND_BASE_URL': 'http://{{ .Values.ingress.hostName }}' }))()" . }}
+    {{ tpl "const config = (() => ({ 'VUE_APP_BACKEND_BASE_URL': 'http://{{ .Values.configmap.backendHostName }}' }))()" . }}
