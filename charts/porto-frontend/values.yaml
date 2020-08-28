@@ -22,5 +22,5 @@ service:
   port:
 
 configMap:
-  name:
-  backendHostName:
+  name: frontend-config
+  backendUrl: http://porto-backend.daf1769eda1b44bbb4f3.eastus.aksapp.io
