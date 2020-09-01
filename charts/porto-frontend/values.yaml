@@ -1,7 +1,7 @@
 name: porto-frontend
 image:
   tag: v1.0.0
-  name: porto-frontend
+  name: porto_frontend
   registry: maratonaaks.azurecr.io
 appPort: 80
 
