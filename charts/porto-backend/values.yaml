@@ -26,3 +26,9 @@ service:
 secret:
   name:
   mongodb_uri: mongodb+srv://root:SCvQd6jrSQgrwVu0@maratona-aks.48pkj.azure.mongodb.net/ship_manager?retryWrites=true&w=majority
+
+hpa:
+  minReplicas: 1
+  maxReplicas: 8
+  CPUUtilization: 20
+  memoryUtilization: 35

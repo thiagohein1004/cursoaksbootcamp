@@ -24,3 +24,9 @@ service:
 configMap:
   name: frontend-config
   backendUrl: http://porto-backend.67adafcf87fe4e9abac2.eastus.aksapp.io
+
+hpa:
+  minReplicas: 1
+  maxReplicas: 8
+  CPUUtilization: 20
+  memoryUtilization: 35

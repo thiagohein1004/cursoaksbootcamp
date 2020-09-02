@@ -54,7 +54,7 @@ metadata:
     kubernetes.io/ingress.class: addon-http-application-routing
 spec:
   rules:
-    - host: porto-backend.daf1769eda1b44bbb4f3.eastus.aksapp.io
+    - host: porto-backend.67adafcf87fe4e9abac2.eastus.aksapp.io
       http:
         paths:
           - path: /
@@ -69,3 +69,28 @@ metadata:
 type: Opaque
 stringData:
   database_mongodb_uri: mongodb+srv://root:SCvQd6jrSQgrwVu0@maratona-aks.48pkj.azure.mongodb.net/ship_manager?retryWrites=true&w=majority
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: porto-backend
+spec:
+  maxReplicas: 8
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: porto-backend
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 20
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 35
