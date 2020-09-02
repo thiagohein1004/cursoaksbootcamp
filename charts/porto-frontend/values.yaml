@@ -16,11 +16,11 @@ deployment:
       memory: 256Mi
 
 ingress:
-  hostName: porto-frontend.daf1769eda1b44bbb4f3.eastus.aksapp.io
+  hostName: porto-frontend.67adafcf87fe4e9abac2.eastus.aksapp.io
 
 service:
   port:
 
 configMap:
   name: frontend-config
-  backendUrl: http://porto-backend.daf1769eda1b44bbb4f3.eastus.aksapp.io
+  backendUrl: http://porto-backend.67adafcf87fe4e9abac2.eastus.aksapp.io
