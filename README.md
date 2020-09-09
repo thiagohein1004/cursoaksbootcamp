@@ -33,6 +33,12 @@ __Front End__: Created with TypeScript. Just go into the directory, type `npm in
 
 You can execute all Kubernetes files in the [kubernetes](./kubernetes) directory using kubectl to create the workloads into a Kubernetes cluster. You can also use [Helm](https://helm.sh) to execute the charts within the [charts](./charts) directory.
 
+### MongoDB
+
+This application needs a MongoDB database in order to work. You can create or host any database and provide it with the connection string.
+
+Use the `values.yml` files present within both charts in the charts directory to find out the variables which need to be replaced. If you're using the Kubernetes' deployment files, replace the connection string in the __backend__ only.
+
 ### Environment Variables
 
 The backend portion requires environment variables to run, those are:
