@@ -18,14 +18,14 @@ deployment:
       memory: 256Mi
 
 ingress:
-  hostName: porto-backend.67adafcf87fe4e9abac2.eastus.aksapp.io
+  hostName: porto-backend.yourdns-zone.aksapp.io
 
 service:
   port:
 
 secret:
   name:
-  mongodb_uri: mongodb+srv://root:SCvQd6jrSQgrwVu0@maratona-aks.48pkj.azure.mongodb.net/ship_manager?retryWrites=true&w=majority
+  mongodb_uri: mongodb+srv://someconnstringhere
 
 hpa:
   minReplicas: 1
