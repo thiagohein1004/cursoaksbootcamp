@@ -54,7 +54,7 @@ metadata:
     kubernetes.io/ingress.class: addon-http-application-routing
 spec:
   rules:
-    - host: porto-backend.67adafcf87fe4e9abac2.eastus.aksapp.io
+    - host: porto-backend.yourdns-zone.aksapp.io
       http:
         paths:
           - path: /
@@ -68,7 +68,7 @@ metadata:
   name: backend-db
 type: Opaque
 stringData:
-  database_mongodb_uri: mongodb+srv://root:SCvQd6jrSQgrwVu0@maratona-aks.48pkj.azure.mongodb.net/ship_manager?retryWrites=true&w=majority
+  database_mongodb_uri: mongodb+srv://someconnectionstringhere
 ---
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
