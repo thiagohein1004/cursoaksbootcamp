@@ -13,7 +13,7 @@ spec:
         app: porto-backend
     spec:
       containers:
-        - image: maratonaaks.azurecr.io/porto_backend:v1.0.0
+        - image: acrtgo.azurecr.io/porto_backend:v1.0.0
           name: porto-backend
           resources:
             requests:
@@ -29,8 +29,8 @@ spec:
             - name: DATABASE_MONGODB_URI
               valueFrom:
                 secretKeyRef:
-                  key: database_mongodb_uri
-                  name: backend-db
+                  key: mongodb+srv://root:Neti12345@dbmongotgo.59slt.mongodb.net/ship_manager?retryWrites=true&w=majority
+                  name: dbmongotgo
             - name: DATABASE_MONGODB_DBNAME
               value: ship_manager
 ---
@@ -68,7 +68,7 @@ metadata:
   name: backend-db
 type: Opaque
 stringData:
-  database_mongodb_uri: mongodb+srv://someconnectionstringhere
+  database_mongodb_uri: mongodb+srv://root:Neti12345@dbmongotgo.59slt.mongodb.net/ship_manager?retryWrites=true&w=majority
 ---
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler

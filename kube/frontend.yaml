@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: porto-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: porto-frontend
+  template:
+    metadata:
+      labels:
+        app: porto-frontend
+    spec:
+      containers:
+        - image: acrtgo.azurecr.io/porto_frontend:v1.0.1
+          name: porto-frontend
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi        
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: /usr/src/app/dist/config.js
+              subPath: config.js
+      volumes:
+        - name: config
+          configMap:
+            name: frontend-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: porto-frontend
+spec:
+  selector:
+    app: porto-frontend
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: porto-frontend
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: porto-frontend.3ac42ccf1c4246a28621.brazilsouth.aksapp.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: porto-frontend
+          servicePort: http
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+data:
+  config.js: |
+    const config = (() => {
+      return {
+        'VUE_APP_BACKEND_BASE_URL': 'http://porto-backend.yourdns-zone.aksapp.io',
+      }
+    })()

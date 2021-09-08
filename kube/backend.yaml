@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: porto-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: porto-backend
+  template:
+    metadata:
+      labels:
+        app: porto-backend
+    spec:
+      containers:
+        - image: acrtgo.azurecr.io/porto_backend:v1.0.0
+          name: porto-backend
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+          ports:
+            - containerPort: 3000
+              name: http
+          env:
+            - name: DATABASE_MONGODB_URI
+              value: mongodb+srv://root:Neti12345@dbmongotgo.59slt.mongodb.net/ship_manager?retryWrites=true&w=majority              
+            - name: DATABASE_MONGODB_DBNAME
+              value: ship_manager
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: porto-backend
+spec:
+  selector:
+    app: porto-backend
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: porto-backend
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: porto-backend.b3604afa34bf4f5c8f37.brazilsouth.aksapp.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: porto-backend
+          servicePort: http
